@@ -4,6 +4,11 @@ import spacy
 
 def cut_away_sources(text):
     # cut away unnesarray information
+
+    start = text.find("== weitere führende Literatur und Multimedia ==")
+    if start > 0:
+        text = text[:start]
+
     start = text.find("== Weiterführende Informationen ==")
     if start > 0:
         text = text[:start]

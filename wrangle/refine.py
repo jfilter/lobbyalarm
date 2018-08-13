@@ -6,7 +6,7 @@ import json
 import util
 
 
-blocklist = ('AmCham Denmark', 'Adam Smith', 'Axel Springer', 'a. D.', 'Ernst & Young', 'Carstensen II', 'Barroso I', 'Barroso II', 'Robin Wood', 'CMS-Rui Pena', 'JP Morgan', 'Lehman Brothers', 'Goldman Sachs', 'Keller and Heckman', 'H. Lundbeck', 'Robert Bosch', 'Clifford Chance', 'Morgan Stanley', 'J.P. Morgan Chase', 'Krauss-Maffei Wegmann', 'Otto von Guericke', "'s Tengelmann", 'Friedrich A.', 'G. Rodenstock')
+blocklist = ('Ulrich Müller/Heidi Klein', 'Ulrich Müller/Heidi', 'AmCham Denmark', 'Adam Smith', 'Axel Springer', 'a. D.', 'Ernst & Young', 'Carstensen II', 'Barroso I', 'Barroso II', 'Robin Wood', 'CMS-Rui Pena', 'JP Morgan', 'Lehman Brothers', 'Goldman Sachs', 'Keller and Heckman', 'H. Lundbeck', 'Robert Bosch', 'Clifford Chance', 'Morgan Stanley', 'J.P. Morgan Chase', 'Krauss-Maffei Wegmann', 'Otto von Guericke', "'s Tengelmann", 'Friedrich A.', 'G. Rodenstock')
 
 def find_names():
     fns = util.get_filenames('../data/res2')
@@ -51,7 +51,7 @@ def find_names():
             index +=1
 
         # filter out useless stuff
-        res = [r.replace('a.D.', '').replace('AG.', '').replace('Prof.', '').replace(':\"Überraschenderweise', '').replace('/CDU', '').replace('informieren.\"', '').strip() for r in res if r not in blocklist and 'stiftung' not in r.lower() and 'von hayek' not in r.lower()]
+        res = [r.replace('a.D.', '').replace('Katzemich/', 'Katzemich').replace('/CSU', '').replace('/FDP', '').replace('/Hamburgisches', '').replace(').Darüber', '').replace(')August', '').replace('AG.', '').replace('(CDU', '').replace('Prof.', '').replace(':\"Überraschenderweise', '').replace('/CDU', '').replace('informieren.\"', '').strip() for r in res if r not in blocklist and 'stiftung' not in r.lower() and 'von hayek' not in r.lower()]
         res = [r for r in res if not r.startswith('Dr. ')]
         all_names.update(res)
 
@@ -78,7 +78,7 @@ def find_names():
 def create_link(name):
     if name.endswith('.txt'):
         name = name.split('.txt')[0]
-    name = name.replace(' ', '_')
+    # name = name.replace(' ', '_')
     # return f'https://lobbypedia.de/wiki/{name}'
     return name
 
@@ -124,8 +124,13 @@ def create_data():
             mergd[name] = {'pages': pages}
 
 
-    with open('../extension/data.json', 'w') as outfile:
+    with open('../extension/data.js', 'w') as outfile:
         json.dump(mergd, outfile, ensure_ascii=False)
+    with open('../extension/data.js', 'r+') as file:
+        text_json = file.read()
+        file.seek(0)
+        file.write('var data = ' + text_json + ';')
+        file.truncate()
 
 if __name__ == "__main__":
     create_data()
