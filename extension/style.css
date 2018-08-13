@@ -1,0 +1,44 @@
+.jfilter-highlight {
+    background-color: #ffece6;
+    cursor: pointer;
+    hyphens: none;
+    white-space: nowrap;
+}
+
+.jfilter-tooltip {
+    background-color: white;
+    text-align: left;
+    text-emphasis: 0;
+    padding: 0.5rem;
+    opacity: 0.95;
+    font-size: 14px;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-family: sans-serif !important;
+    color: black;
+    margin: 0 !important;
+    /* line-height: 1.3 !important; */
+    border: 1px solid whitesmoke;
+    text-transform: none !important;
+    height: auto;
+    width: auto;
+    min-width: none;
+    max-width: none;
+    min-height: none;
+    max-height: none;
+}
+
+.jfilter-tooltip p {
+    font-size: 21px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.jfilter-tooltip a {
+    text-decoration: underline !important;
+    /* text-decoration-color: #ffece6 !important; */
+}
+
+.jfilter-tooltip div {
+    text-align: center !important;
+}
