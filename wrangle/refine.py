@@ -103,29 +103,40 @@ def create_data():
 
     occ = collections.defaultdict(list)
 
+    # search for occurences of people in all documents
     for name in names_set:
         for page_name, text in files.items():
             if name in text:
                 occ[name].append(create_link(page_name))
     print(occ)
 
-    mergd = {}
+    merged = {}
 
     print(site)
     print(site.keys())
 
+    # # take filenames as special interest and search in all files
+    # remaining_files = [f for f in files.keys() if f not in occ.keys()]
+
+    # print(remaining_files)
+
+    # for name in remaining_files:
+    #     for page_name, text in files.items():
+    #         if name in text:
+    #             occ[name].append(create_link(page_name))
+
+    # create final data object
     for name, pages in occ.items():
         if name in site.keys():
             # remove profile from other pages
             if site[name] in pages:
                 pages.remove(site[name])
-            mergd[name] = {'pages': pages, 'profile': site[name]}
+            merged[name] = {'pages': pages, 'profile': site[name]}
         else:
-            mergd[name] = {'pages': pages}
-
+            merged[name] = {'pages': pages}
 
     with open('../extension/data.js', 'w') as outfile:
-        json.dump(mergd, outfile, ensure_ascii=False)
+        json.dump(merged, outfile, ensure_ascii=False)
     with open('../extension/data.js', 'r+') as file:
         text_json = file.read()
         file.seek(0)
