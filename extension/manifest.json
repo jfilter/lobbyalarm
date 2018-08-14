@@ -1,8 +1,8 @@
 {
     "name": "LobbyAlarm",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description":
-        "Lobbyismus aufdecken. Verlinken zu LobbyPedia (LobbyControl).",
+        "Personen, die auf LobbyPedia.de auftauchen, werden hervorgehoben. Das Plugin operiert (ohne Server) nur in deinem Browser.",
     "manifest_version": 2,
     "content_scripts": [
         {
@@ -12,5 +12,10 @@
             "exclude_globs": ["https://lobbypedia.de/*"],
             "run_at": "document_end"
         }
-    ]
+    ],
+    "icons": {
+        "16": "icons/icon16.jpg",
+        "48": "icons/icon48.jpg",
+        "128": "icons/icon128.jpg"
+    }
 }
